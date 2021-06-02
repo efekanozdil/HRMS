@@ -9,36 +9,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import kodlamaio.HRMS.business.abstracts.JobTitleService;
+import kodlamaio.HRMS.business.abstracts.EmployerService;
 import kodlamaio.HRMS.core.utilities.results.DataResult;
 import kodlamaio.HRMS.core.utilities.results.Result;
-import kodlamaio.HRMS.entities.concretes.JobTitle;
+import kodlamaio.HRMS.entities.concretes.Employer;
 
 @RestController
-@RequestMapping("/api/job-titles")
-public class JobTitlesController {
+@RequestMapping("/api/employers")
+public class EmployersContoller {
 	
-	private JobTitleService jobTitleService;
 	
+	private EmployerService employerService;
+
 	@Autowired
-	public JobTitlesController(JobTitleService jobTitleService) {
-		
-		this.jobTitleService = jobTitleService;
+	public EmployersContoller(EmployerService employerService) {
+		this.employerService = employerService;
 	}
-
-
+	
 	@GetMapping("/getall")
-	public DataResult<List<JobTitle>> getAll(){
-		return  this.jobTitleService.getAll();
+	public DataResult<List<Employer>> getAll(){
+		return employerService.getAll();
 	}
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody JobTitle jobtitle) {
-		return this.jobTitleService.add(jobtitle);
+	public Result add(@RequestBody  Employer employer) {
+		return employerService.add(employer);
 		
 	}
-	
-
 	
 
 }
